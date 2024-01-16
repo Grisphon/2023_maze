@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include "../include/fonction.h"
 
 unsigned int stu_strlen(const char *str)
 {
@@ -112,6 +113,25 @@ char *reader(int fd)
     return reading(size_read, bufferread, accu, fd);
 }
 
+void compteur(char *buffer)
+{
+    int hauteur;
+    int count;
+
+    hauteur = 0;
+    count = 0;
+    while (buffer[count] != '\0') {
+        if (buffer[count] == '\n') {
+            hauteur += 1;
+        }
+        count += 1;
+    }
+    write(1, "Width: ", 7);
+    print_base10(count / (hauteur + 1));
+    write(1, "Height: ", 8);
+    print_base10(hauteur);
+}
+
 int main(int ac, char **av)
 {
     int fd;
@@ -123,6 +143,7 @@ int main(int ac, char **av)
     fd = open(av[1], O_RDONLY);
     buffer = reader(fd);
     write(1, buffer, stu_strlen(buffer));
+    compteur(buffer);
     free(buffer);
     close(fd);
 }
