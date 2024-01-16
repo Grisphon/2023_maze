@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "../include/fonction.h"
+// useless text u know
 
 unsigned int stu_strlen(const char *str)
 {
