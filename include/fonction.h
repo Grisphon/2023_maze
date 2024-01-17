@@ -9,9 +9,22 @@
 #ifndef FONCTION_
 #define FONCTION_
 
-int start_finder(const char *str, char subject);
+enum facing {
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST,
+};
+
+struct map {
+    int length;
+    int height;
+};
+
+int shift(char *maze, enum facing dir, int pos, int length, int height);
+int start_finder(const char *str);
 int print_base10(int nb);
-void map_size(char *buffer);
+struct map map_size(char *buffer);
 char *reader(int fd, char **av);
 unsigned int stu_strlen(const char *str);
 

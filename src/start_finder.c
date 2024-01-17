@@ -1,4 +1,4 @@
-int start_finder(const char *str, char subject)
+int start_finder(const char *str)
 {
     int count;
     int back;
@@ -8,8 +8,8 @@ int start_finder(const char *str, char subject)
     while (str[count] != '\0') {
         if (str[count] == '\n')
             back += 1;
-        if (str[count] == subject)
-            return count + 1 - back;
+        if (str[count] == 'S')
+            return count - back;
         else
             count = count + 1;
     }
