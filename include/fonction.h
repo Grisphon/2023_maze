@@ -21,7 +21,8 @@ struct map {
     int height;
 };
 
-int shift(char *maze, enum facing dir, int pos, int length, int height);
+enum facing side(char *maze, int pos, struct map map);
+int shift(char *maze, enum facing dir, int pos, struct map map);
 int start_finder(const char *str);
 int print_base10(int nb);
 struct map map_size(char *buffer);
