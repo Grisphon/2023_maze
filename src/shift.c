@@ -56,7 +56,7 @@ static int west(char *maze, enum facing dir, int pos, struct map map)
 
 int shift(char *maze, enum facing dir, int pos, struct map map)
 {
-    if (pos >= 0 && pos < map.length * map.height) {
+    if (pos >= 0 && pos < (map.length + 1) * map.height ) {
         if (maze[pos] == 'G')
             return 0;
         if (dir == NORTH)
