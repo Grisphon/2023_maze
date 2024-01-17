@@ -9,7 +9,7 @@
 #ifndef FONCTION_
 #define FONCTION_
 
-int stu_strchr(const char *str, char subject);
+int start_finder(const char *str, char subject);
 int print_base10(int nb);
 void map_size(char *buffer);
 char *reader(int fd, char **av);

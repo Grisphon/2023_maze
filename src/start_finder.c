@@ -1,4 +1,4 @@
-int stu_strchr(const char *str, char subject)
+int start_finder(const char *str, char subject)
 {
     int count;
     int back;
