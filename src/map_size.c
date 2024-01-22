@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include "fonction.h"
 
-struct map map_size(char *buffer)
+struct map map_size(char *buffer, int start)
 {
     int hauteur;
     int count;
@@ -22,5 +22,7 @@ struct map map_size(char *buffer)
     write(1, "\n", 1);
     map.height = hauteur;
     map.length = count / (hauteur + 1);
+    map.start = start;
+    map.exit = 2;
     return map;
 }

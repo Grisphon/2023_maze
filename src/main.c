@@ -16,8 +16,9 @@ int main(int ac, char **av)
     fd = open(av[1], O_RDONLY);
     buffer = reader(fd, av);
     pos = start_finder(buffer);
-    map = map_size(buffer);
-    shift(buffer, side(buffer, pos, map), pos, map);
+    map = map_size(buffer, pos);
+    if (shift(buffer, side(buffer, pos, map), pos, map) == 1)
+        return 1;
     write(1, buffer, stu_strlen(buffer));
     free(buffer);
     close(fd);

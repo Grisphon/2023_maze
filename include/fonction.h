@@ -19,13 +19,16 @@ enum facing {
 struct map {
     int length;
     int height;
+    int start;
+    int exit;
 };
 
+int no_exit();
 enum facing side(char *maze, int pos, struct map map);
 int shift(char *maze, enum facing dir, int pos, struct map map);
 int start_finder(const char *str);
 int print_base10(int nb);
-struct map map_size(char *buffer);
+struct map map_size(char *buffer, int start);
 char *reader(int fd, char **av);
 unsigned int stu_strlen(const char *str);
 
