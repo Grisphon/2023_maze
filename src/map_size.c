@@ -23,6 +23,6 @@ struct map map_size(char *buffer, int start)
     map.height = hauteur;
     map.length = count / (hauteur + 1);
     map.start = start;
-    map.exit = 2;
+    map.exit = 3;
     return map;
 }

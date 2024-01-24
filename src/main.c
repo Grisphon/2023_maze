@@ -17,8 +17,10 @@ int main(int ac, char **av)
     buffer = reader(fd, av);
     pos = start_finder(buffer);
     map = map_size(buffer, pos);
-    if (shift(buffer, side(buffer, pos, map), pos, map) == 1)
+    if (shift(buffer, side(buffer, pos, map), pos, map) == 1) {
+        free(buffer);
         return 1;
+    }
     write(1, buffer, stu_strlen(buffer));
     free(buffer);
     close(fd);

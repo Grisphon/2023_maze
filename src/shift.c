@@ -58,7 +58,7 @@ int shift(char *maze, enum facing dir, int pos, struct map map)
 {
     if (pos >= 0 && pos < (map.length + 1) * map.height ) {
         if (pos == map.start)
-            map.exit -= 1;
+            map.exit = map.exit - 1;
         if (map.exit == 0)
             return no_exit();
         if (maze[pos] == 'G')

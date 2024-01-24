@@ -33,7 +33,6 @@ char *reader(int fd, char **av)
     provisoir = malloc(sizeof (char) * (total + 1));
     read(fd, provisoir, total);
     provisoir[total] = '\0';
-    //  write(1, provisoir, total);
     free(buffer);
     return provisoir;
 }
