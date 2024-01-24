@@ -20,7 +20,8 @@ int main(int ac, char **av)
         free(buffer);
         write(1, "Invalid maze\n", 13);
         return 1;
-    }
+    } else
+        size_print(map);
     if (shift(buffer, side(buffer, pos, map), pos, map) == 1) {
         free(buffer);
         return 1;

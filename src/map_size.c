@@ -15,11 +15,6 @@ struct map map_size(char *buffer, int start)
         }
         count += 1;
     }
-    write(1, "Width: ", 7);
-    print_base10((count - hauteur) / hauteur);
-    write(1, "Height: ", 8);
-    print_base10(hauteur);
-    write(1, "\n", 1);
     map.height = hauteur;
     map.length = (count - hauteur) / hauteur;
     map.start = start;

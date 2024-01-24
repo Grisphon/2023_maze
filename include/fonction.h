@@ -23,6 +23,7 @@ struct map {
     int exit;
 };
 
+void size_print(struct map map);
 int is_valid(char *maze, struct map map);
 int no_exit();
 enum facing side(char *maze, int pos, struct map map);
