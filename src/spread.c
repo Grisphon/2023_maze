@@ -2,7 +2,8 @@
 
 static int north(char *maze, enum facing dir, int pos, struct map map)
 {
-    if (maze[pos - 1] == '#' || maze[pos - 1] == '\n') {
+    if (maze[pos - 1] == '#' || maze[pos - 1] == '\n' || maze[pos - 1] == 'S'
+        || maze[pos - 1] == 'G') {
         dir = EAST;
         return spread(maze, dir, pos, map);
     } else {
@@ -22,7 +23,9 @@ static int north(char *maze, enum facing dir, int pos, struct map map)
 static int east(char *maze, enum facing dir, int pos, struct map map)
 {
     if (maze[pos - map.length - 1] == '#'
-        || maze[pos - map.length - 1] == '\n') {
+        || maze[pos - map.length - 1] == '\n'
+        || maze[pos - map.length - 1] == 'S'
+        || maze[pos - map.length - 1] == 'G') {
         dir = SOUTH;
         return spread(maze, dir, pos, map);
     } else {
@@ -41,7 +44,8 @@ static int east(char *maze, enum facing dir, int pos, struct map map)
 
 static int south(char *maze, enum facing dir, int pos, struct map map)
 {
-    if (maze[pos + 1] == '#' || maze[pos + 1] == '\n') {
+    if (maze[pos + 1] == '#' || maze[pos + 1] == '\n' || maze[pos + 1] == 'S'
+        || maze[pos + 1] == 'G') {
         dir = WEST;
         return spread(maze, dir, pos, map);
     } else {
@@ -60,8 +64,10 @@ static int south(char *maze, enum facing dir, int pos, struct map map)
 
 static int west(char *maze, enum facing dir, int pos, struct map map)
 {
-    if (maze[pos + map.length + 1] == '#' ||
-        maze[pos + map.length + 1] == '\n') {
+    if (maze[pos + map.length + 1] == '#'
+        || maze[pos + map.length + 1] == '\n'
+        || maze[pos + map.length + 1] == 'S'
+        || maze[pos + map.length + 1] == 'G') {
         dir = NORTH;
         return spread(maze, dir, pos, map);
     } else {
@@ -85,7 +91,7 @@ int spread(char *maze, enum facing dir, int pos, struct map map)
             map.exit = map.exit - 1;
         if (map.exit == 0)
             return no_exit();
-        if (maze[pos] == 'G')
+        if (check(maze) == 0)
             return 0;
         if (dir == NORTH)
             return north(maze, dir, pos, map);

@@ -23,7 +23,7 @@ int main(int ac, char **av)
         return 1;
     } else
         size_print(map);
-    buffer[map.start] = '#';
+    buffer[map.start] = '.';
     if (spread(buffer, side(buffer, pos, map), pos, map) == 1) {
         free(buffer);
         return 1;

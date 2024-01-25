@@ -24,6 +24,7 @@ struct map {
     int how_far;
 };
 
+int check(char* maze);
 void size_print(struct map map);
 int is_valid(char *maze, struct map map);
 int no_exit();

@@ -1,9 +1,14 @@
-int check(char* maze, struct map map)
+#include "fonction.h"
+
+int check(char* maze)
 {
     int count;
 
     count = 0;
-    while (count < stu_strlen(count)) {
-        if (maze[count]  )
+    while (count < (int)stu_strlen(maze)) {
+        if (maze[count] == '.')
+            return 1;
+        count = count + 1;
     }
+    return 0;
 }
