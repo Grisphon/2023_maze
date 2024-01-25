@@ -31,6 +31,15 @@ static int is_valid_boucle(char *buffer, struct map map)
     return 0;
 }
 
+int freeable(int retu, char *buffspread, char *buffer)
+{
+    free(buffspread);
+    free(buffer);
+    if (retu == -1)
+        write(1, "stop processing : timed out\n", 28);
+    return retu;
+}
+
 static int shift_spread(char *buffer, int pos, struct map map)
 {
     char *buffspread;
@@ -40,23 +49,23 @@ static int shift_spread(char *buffer, int pos, struct map map)
     buffspread = stu_strdup(buffer);
     buffer[map.start] = '.';
     buffspread[map.start] = '.';
-    if (shift(buffer, pos, map, timestamp) == 1) {
-        free(buffer);
-        return 1;
-    }
-    buffer[map.start] = 'S';
-    write(1, buffer, stu_strlen(buffer));
-    free(buffer);
+    if (shift(buffer, pos, map, timestamp) == 0) {
+        buffer[map.start] = 'S';
+        write(1, buffer, stu_strlen(buffer));
+    } else if (shift(buffer, pos, map, timestamp == 1))
+        return freeable(1, buffspread, buffer);
+    else
+        return freeable(-1, buffspread, buffer);
     timestamp = time(NULL);
-    if (spread(buffspread, pos, map, timestamp) == 1) {
-        free(buffspread);
-        return 1;
-    }
-    buffspread[map.start] = 'S';
-    write(1, "\n", 1);
-    write(1, buffspread, stu_strlen(buffspread));
-    free(buffspread);
-    return 0;
+    if (spread(buffspread, pos, map, timestamp) == 0) {
+        buffspread[map.start] = 'S';
+        write(1, "\n", 1);
+        write(1, buffspread, stu_strlen(buffspread));
+    } else if (spread(buffspread, pos, map, timestamp) == 1)
+        return freeable(1, buffspread, buffer);
+    else
+        return freeable(-1, buffspread, buffer);
+    return freeable(0, buffspread, buffer);
 }
 
 int main(int ac, char **av)
