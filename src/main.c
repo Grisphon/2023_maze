@@ -34,18 +34,21 @@ static int is_valid_boucle(char *buffer, struct map map)
 static int shift_spread(char *buffer, int pos, struct map map)
 {
     char *buffspread;
+    time_t timestamp;
 
+    timestamp = time(NULL);
     buffspread = stu_strdup(buffer);
     buffer[map.start] = '.';
     buffspread[map.start] = '.';
-    if (shift(buffer, pos, map) == 1) {
+    if (shift(buffer, pos, map, timestamp) == 1) {
         free(buffer);
         return 1;
     }
     buffer[map.start] = 'S';
     write(1, buffer, stu_strlen(buffer));
     free(buffer);
-    if (spread(buffspread, pos, map) == 1) {
+    timestamp = time(NULL);
+    if (spread(buffspread, pos, map, timestamp) == 1) {
         free(buffspread);
         return 1;
     }
@@ -70,13 +73,12 @@ int main(int ac, char **av)
     pos = start_finder(buffer);
     map = map_size(buffer, pos);
     map.how_far = 0;
-    if (is_valid_boucle(buffer, map) == 1) {
+    if (is_valid_boucle(buffer, map) == 1)
         return 1;
-    } else
+    else
         size_print(map);
     map.dir = side(buffer, pos, map);
-    if (shift_spread(buffer, pos, map) == 1) {
+    if (shift_spread(buffer, pos, map) == 1)
         return 1;
-    }
     close(fd);
 }
