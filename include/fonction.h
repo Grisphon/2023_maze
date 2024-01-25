@@ -22,6 +22,7 @@ struct map {
     int start;
     int exit;
     int how_far;
+    enum facing dir;
 };
 
 int check(char* maze);
@@ -29,12 +30,12 @@ void size_print(struct map map);
 int is_valid(char *maze, struct map map);
 int no_exit();
 enum facing side(char *maze, int pos, struct map map);
-int shift(char *maze, enum facing dir, int pos, struct map map);
+int shift(char *maze, int pos, struct map map);
 int start_finder(const char *str);
 int print_base10(int nb);
 struct map map_size(char *buffer, int start);
 char *reader(int fd, char **av);
 unsigned int stu_strlen(const char *str);
-int spread(char *maze, enum facing dir, int pos, struct map map);
+int spread(char *maze, int pos, struct map map);
 
 #endif
