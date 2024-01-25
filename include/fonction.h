@@ -21,6 +21,7 @@ struct map {
     int height;
     int start;
     int exit;
+    int how_far;
 };
 
 void size_print(struct map map);
@@ -33,5 +34,6 @@ int print_base10(int nb);
 struct map map_size(char *buffer, int start);
 char *reader(int fd, char **av);
 unsigned int stu_strlen(const char *str);
+int spread(char *maze, enum facing dir, int pos, struct map map);
 
 #endif

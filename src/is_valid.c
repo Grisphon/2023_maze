@@ -11,8 +11,7 @@ int is_valid(char *maze, struct map map)
             return 1;
         count += 1;
     }
-    if (map.height * (map.length + 1) != (int)stu_strlen(maze)) {
+    if (map.height * (map.length + 1) != (int)stu_strlen(maze))
         return 1;
-    }
     return 0;
 }

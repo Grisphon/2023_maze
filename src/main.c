@@ -16,16 +16,19 @@ int main(int ac, char **av)
     buffer = reader(fd, av);
     pos = start_finder(buffer);
     map = map_size(buffer, pos);
+    map.how_far = 0;
     if (is_valid(buffer, map) == 1) {
         free(buffer);
         write(1, "Invalid maze\n", 13);
         return 1;
     } else
         size_print(map);
-    if (shift(buffer, side(buffer, pos, map), pos, map) == 1) {
+    buffer[map.start] = '#';
+    if (spread(buffer, side(buffer, pos, map), pos, map) == 1) {
         free(buffer);
         return 1;
     }
+    buffer[map.start] = 'S';
     write(1, buffer, stu_strlen(buffer));
     free(buffer);
     close(fd);

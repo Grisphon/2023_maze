@@ -4,12 +4,18 @@ static int north(char *maze, enum facing dir, int pos, struct map map)
 {
     if (maze[pos - 1] == '#' || maze[pos - 1] == '\n') {
         dir = EAST;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     } else {
         dir = WEST;
-        maze[pos] = ' ';
+        if (maze[pos] == '.') {
+            maze[pos] = '0' + map.how_far % 10;
+        } else {
+            map.how_far = maze[pos] - 0;
+            map.how_far = map.how_far + 2;
+        }
+        map.how_far = map.how_far + 1;
         pos = pos - 1;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     }
 }
 
@@ -18,12 +24,18 @@ static int east(char *maze, enum facing dir, int pos, struct map map)
     if (maze[pos - map.length - 1] == '#'
         || maze[pos - map.length - 1] == '\n') {
         dir = SOUTH;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     } else {
         dir = NORTH;
-        maze[pos] = ' ';
+        if (maze[pos] == '.') {
+            maze[pos] = '0' + map.how_far % 10;
+        } else {
+            map.how_far = maze[pos] - 0;
+            map.how_far = map.how_far + 2;
+        }
+        map.how_far = map.how_far + 1;
         pos = pos - map.length - 1;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     }
 }
 
@@ -31,12 +43,18 @@ static int south(char *maze, enum facing dir, int pos, struct map map)
 {
     if (maze[pos + 1] == '#' || maze[pos + 1] == '\n') {
         dir = WEST;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     } else {
         dir = EAST;
-        maze[pos] = ' ';
+        if (maze[pos] == '.') {
+            maze[pos] = '0' + map.how_far % 10;
+        } else {
+            map.how_far = maze[pos] - 0;
+            map.how_far = map.how_far + 2;
+        }
+        map.how_far = map.how_far + 1;
         pos = pos + 1;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     }
 }
 
@@ -45,16 +63,22 @@ static int west(char *maze, enum facing dir, int pos, struct map map)
     if (maze[pos + map.length + 1] == '#' ||
         maze[pos + map.length + 1] == '\n') {
         dir = NORTH;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     } else {
         dir = SOUTH;
-        maze[pos] = ' ';
+        if (maze[pos] == '.') {
+            maze[pos] = '0' + map.how_far % 10;
+        } else {
+            map.how_far = maze[pos] - 0;
+            map.how_far = map.how_far + 2;
+        }
+        map.how_far = map.how_far + 1;
         pos = pos + map.length + 1;
-        return shift(maze, dir, pos, map);
+        return spread(maze, dir, pos, map);
     }
 }
 
-int shift(char *maze, enum facing dir, int pos, struct map map)
+int spread(char *maze, enum facing dir, int pos, struct map map)
 {
     if (pos >= 0 && pos < (map.length + 1) * map.height ) {
         if (pos == map.start)
@@ -74,4 +98,3 @@ int shift(char *maze, enum facing dir, int pos, struct map map)
     }
     return -1;
 }
-
