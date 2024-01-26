@@ -20,10 +20,11 @@ char *reader(int fd, char **av)
 
     buffer = malloc(sizeof (char) * 100);
     total = 0;
-    if (!buffer) {
+    if (!buffer)
         return NULL;
-    }
     size_read = read(fd, buffer, 99);
+    if (!size_read)
+        return NULL;
     while (size_read > 0) {
         total += size_read;
         size_read = read(fd, buffer, 99);

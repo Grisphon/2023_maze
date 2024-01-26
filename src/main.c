@@ -68,6 +68,23 @@ static int shift_spread(char *buffer, int pos, struct map map)
     return freeable(0, buffspread, buffer);
 }
 
+static int error(int ac, char **av)
+{
+    int fd;
+
+    if (ac <= 1 || ac > 2) {
+        write(1, "Argument invalid !\n", 19);
+        return 1;
+    }
+    fd = open(av[1], O_RDONLY);
+    if (fd == -1) {
+        write(1, "Invalid file !\n", 15);
+        return 1;
+    }
+    close(fd);
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     int fd;
@@ -75,7 +92,7 @@ int main(int ac, char **av)
     struct map map;
     int pos;
 
-    if (ac < 1 || ac > 2)
+    if (error(ac, av) == 1)
         return 1;
     fd = open(av[1], O_RDONLY);
     buffer = reader(fd, av);
