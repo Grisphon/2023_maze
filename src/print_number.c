@@ -36,7 +36,7 @@ static int nb_len(int nb)
     if (nb == 0) {
         return 1;
     }
-    if (nb < 0){
+    if (nb < 0) {
         nb = nb * -1;
     }
     while (nb > 0) {

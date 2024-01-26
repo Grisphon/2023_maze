@@ -31,15 +31,6 @@ static int is_valid_boucle(char *buffer, struct map map)
     return 0;
 }
 
-int freeable(int retu, char *buffspread, char *buffer)
-{
-    free(buffspread);
-    free(buffer);
-    if (retu == -1)
-        write(1, "stop processing : timed out\n", 28);
-    return retu;
-}
-
 static int shift_spread(char *buffer, int pos, struct map map)
 {
     char *buffspread;

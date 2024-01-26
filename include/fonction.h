@@ -27,6 +27,7 @@ struct map {
     enum facing dir;
 };
 
+int freeable(int retu, char *buffspread, char *buffer);
 int check(char* maze);
 void size_print(struct map map);
 int is_valid(char *maze, struct map map);
