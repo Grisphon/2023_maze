@@ -27,6 +27,7 @@ struct map {
     enum facing dir;
 };
 
+unsigned int coords_to_idx(unsigned int x, unsigned int y, unsigned int width);
 int freeable(int retu, char *buffspread, char *buffer);
 int check(char* maze);
 void size_print(struct map map);
