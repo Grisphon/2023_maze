@@ -1,4 +1,5 @@
-# 2023_maze, realise en collaboration avec Ilan Trigueiro-Legrand
+# 2023_maze
+realise en collaboration avec Ilan Trigueiro-Legrand
 
 ## Explication : 
 
